@@ -7,7 +7,6 @@ from ev3dev.ev3 import *
 # attach large motors to ports B and C, medium motor to port A
 motor_left = LargeMotor('outC')
 motor_right = LargeMotor('outB')
-motor_a = MediumMotor('outA')
 
 #==============================================
 print("\n============To the order!============\n\n\n\n============LOG============\n")
@@ -20,12 +19,6 @@ def getch():
     termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     
     return ch
-
-def cabezaderecha():
-   motor_a.run_forever(speed_sp=450)
-
-def cabezaizquierda():
-   motor_a.run_forever(speed_sp=-450)
 
 def marchaimp():
    subprocess.call(['python3', 'marchaImperial'])   
@@ -45,19 +38,7 @@ def forward():
 def back():
    motor_left.run_forever(speed_sp=-450)
    motor_right.run_forever(speed_sp=-450)
-
-#==============================================
-
-def left():
-   motor_left.run_forever(speed_sp=-450)
-   motor_right.run_forever(speed_sp=450)
-
-#==============================================
-
-def right():
-   motor_left.run_forever(speed_sp=450)
-   motor_right.run_forever(speed_sp=-450)
-
+    
 #==============================================
 
 def stop():
@@ -72,17 +53,9 @@ while True:
    if k == 'm':
      marchaimp()
    if k == 'g':
-      cabezaderecha()
-   if k == 'h':  
-      cabezaizquierda()
-   if k == 's':
       forward()
    if k == 'w':
       back()
-   if k == 'd':
-      right()
-   if k == 'a':
-      left()
    if k == ' ':
       stop()
    if k == 'q':
